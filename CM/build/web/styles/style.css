@@ -1,0 +1,100 @@
+* {
+    margin: 0;
+    padding: 0;
+    borders: 0;
+}
+
+h1 {
+   text-align: center;
+   font-size: 70px;
+   padding-top: 10%;
+   text-transform: uppercase;
+   font-family: 'Besom'
+   
+   
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+h2 {
+    text-align: left;
+    font-size: 40px;
+    font-family: 'Asap';
+    
+}
+
+p {
+    font-family: 'Asap';
+    font-size: 30px;
+    margin-bottom: 5%;
+    padding-left: 5%;
+}
+
+.banner {
+    background: url("../images/background/banner.jpg") fixed no-repeat 50%;
+}
+
+.pawgroom {
+    background: url("../images/background/pawgroombanner2.jpg") fixed no-repeat 10%;
+    color: black;
+}
+
+
+.button {
+    background-color: #89dfff;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    margin-bottom: 5%;
+    margin-left: 80%;
+   
+}
+.services {
+    background: url("../images/background/pets10.jpg") fixed no-repeat 50%;
+    padding-bottom: 10%;
+}
+
+.aboutus {
+    background: url("../images/background/buttombanner2.jpg");
+}
+
+.inner-par {
+    padding-bottom: 55%;
+
+}
+
+.search {
+    margin: 11px;
+}
+
+form {
+    margin-left: 30%;
+    color: black;
+    padding-left: 5%;
+    margin-bottom: 5%;
+}
+
+.pawgroom-request {
+    background: #a5dff0;
+    font-family: 'Asap';
+}
+
+.pawmed {
+     background: url("../images/background/pawgroombanner2.jpg") fixed no-repeat 10%;
+    
+}
+
+.request {
+    margin: 5%;
+}
+
+
+

@@ -1,0 +1,154 @@
+/*
+ * Base structure
+ */
+
+/* Move down content because we have a fixed navbar that is 50px tall */
+body {
+  padding-top: 50px;
+  background: -webkit-linear-gradient(#94cfc9, #69b3c0, #4699b7, #20566e, #183641); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(#94cfc9, #69b3c0, #4699b7, #20566e, #183641); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(#94cfc9, #69b3c0, #4699b7, #20566e, #183641); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(to right, #94cfc9, #69b3c0, #4699b7, #20566e, #183641);
+}
+.nav.nav-right li {
+        float: right;
+    }
+
+/*
+ * Global add-ons
+ */
+
+.sub-header {
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+/*
+ * Top navigation
+ * Hide default border to remove 1px line.
+ */
+.navbar-fixed-top {
+  border: 0;
+  background: -webkit-linear-gradient(#94cfc9, #69b3c0, #4699b7, #20566e, #183641); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(#94cfc9, #69b3c0, #4699b7, #20566e, #183641); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(#94cfc9, #69b3c0, #4699b7, #20566e, #183641); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(to right, #94cfc9, #69b3c0, #4699b7, #20566e, #183641);
+}
+
+.navbar-brand {
+  color:white;
+}
+label{
+  float: right;
+}
+#example_filter{
+  float: right;
+}
+/*
+ * Sidebar
+ */
+
+/* Hide for mobile, show later */
+.sidebar {
+  display: none;
+}
+@media (min-width: 768px) {
+  .sidebar {
+    background-color: "pink";
+    position: fixed;
+    top: 51px;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    display: block;
+    padding: 20px;
+    overflow-x: hidden;
+    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+    background-color: #f5f5f5;
+    border-right: 1px solid #eee;
+  }
+}
+
+/* Sidebar navigation */
+.nav-sidebar {
+  margin-right: -21px; /* 20px padding + 1px border */
+  margin-bottom: 20px;
+  margin-left: -20px;
+}
+.nav-sidebar > li > a {
+  padding-right: 20px;
+  padding-left: 20px;
+}
+.nav-sidebar > .active > a,
+.nav-sidebar > .active > a:hover,
+.nav-sidebar > .active > a:focus {
+  color: #fff;
+  background-color: #428bca;
+}
+
+
+/*
+ * Main content
+ */
+
+.main {
+  padding: 20px;
+}
+@media (min-width: 768px) {
+  .main {
+    padding-right: 40px;
+    padding-left: 40px;
+  }
+}
+.main .page-header {
+  margin-top: 0;
+}
+
+
+/*
+ * Placeholder dashboard ideas
+ */
+
+.placeholders {
+  margin-bottom: 30px;
+  text-align: center;
+}
+.placeholders h4 {
+  margin-bottom: 0;
+}
+.placeholder {
+  margin-bottom: 20px;
+}
+.placeholder img {
+  display: inline-block;
+  border-radius: 50%;
+}
+
+.stat {
+    padding:20px 5px;
+    background:#0d5e99;
+    text-align:center;
+    float:left;
+    margin-left:100px;
+    width:150px;
+}
+.stat-count {
+    font-size: 51px;
+    font-weight: normal;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    overflow:hidden;
+    font-family:"Impact";
+    padding: 0;
+    position: relative;
+}
+.stat-detail {
+    color:#0d9999;
+    padding-top:10px;
+    font: italic 1.3rem/1.75 "Impact";
+}
+
+#th{
+  color: red;
+}
