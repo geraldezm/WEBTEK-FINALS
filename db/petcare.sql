@@ -1,230 +1,140 @@
--- MySQL dump 10.13  Distrib 5.7.12, for Win64 (x86_64)
+-- phpMyAdmin SQL Dump
+-- version 4.5.5.1
+-- http://www.phpmyadmin.net
 --
--- Host: localhost    Database: petcare
--- ------------------------------------------------------
--- Server version	5.7.11
+-- Host: 127.0.0.1
+-- Generation Time: May 28, 2017 at 01:47 AM
+-- Server version: 5.7.11
+-- PHP Version: 5.6.19
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `petcare`
+--
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `adminlogin`
 --
 
-DROP TABLE IF EXISTS `adminlogin`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `adminlogin` (
-  `admin_id` int(1) NOT NULL AUTO_INCREMENT,
+  `admin_id` int(1) NOT NULL,
   `username` varchar(50) NOT NULL,
-  `password` varchar(50) NOT NULL,
-  PRIMARY KEY (`admin_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+  `password` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `adminlogin`
 --
 
-LOCK TABLES `adminlogin` WRITE;
-/*!40000 ALTER TABLE `adminlogin` DISABLE KEYS */;
-INSERT INTO `adminlogin` VALUES (1,'admin','21232f297a57a5a743894a0e4a801fc3');
-/*!40000 ALTER TABLE `adminlogin` ENABLE KEYS */;
-UNLOCK TABLES;
+INSERT INTO `adminlogin` (`admin_id`, `username`, `password`) VALUES
+(1, 'admin', '21232f297a57a5a743894a0e4a801fc3');
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `appointment`
 --
 
-DROP TABLE IF EXISTS `appointment`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `appointment` (
-  `appointment_id` int(11) NOT NULL AUTO_INCREMENT,
+  `appointment_id` int(11) NOT NULL,
   `request_date` date NOT NULL,
   `expected_date` date NOT NULL,
   `status` enum('Done','Not yet done') NOT NULL,
   `time` time(4) NOT NULL,
   `customer_id` int(11) NOT NULL,
   `serviceprovider_id` int(11) NOT NULL,
-  `servicerequest_id` int(11) NOT NULL,
-  PRIMARY KEY (`appointment_id`),
-  UNIQUE KEY `appointment_id_UNIQUE` (`appointment_id`),
-  UNIQUE KEY `customer_id_UNIQUE` (`customer_id`),
-  UNIQUE KEY `serviceprovider_id_UNIQUE` (`serviceprovider_id`),
-  UNIQUE KEY `servicerequest_id_UNIQUE` (`servicerequest_id`)
+  `servicerequest_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `appointment`
---
-
-LOCK TABLES `appointment` WRITE;
-/*!40000 ALTER TABLE `appointment` DISABLE KEYS */;
-/*!40000 ALTER TABLE `appointment` ENABLE KEYS */;
-UNLOCK TABLES;
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `chat`
 --
 
-DROP TABLE IF EXISTS `chat`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `chat` (
-  `chat_id` int(11) NOT NULL AUTO_INCREMENT,
+  `chat_id` int(11) NOT NULL,
   `chatDate` date NOT NULL,
   `content` varchar(45) NOT NULL,
   `serviceprovider_id` int(11) NOT NULL,
-  `customer_id` int(11) NOT NULL,
-  PRIMARY KEY (`chat_id`),
-  UNIQUE KEY `serviceprovider_id_UNIQUE` (`serviceprovider_id`),
-  UNIQUE KEY `customer_id_UNIQUE` (`customer_id`),
-  UNIQUE KEY `chat_id_UNIQUE` (`chat_id`)
+  `customer_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `chat`
---
-
-LOCK TABLES `chat` WRITE;
-/*!40000 ALTER TABLE `chat` DISABLE KEYS */;
-/*!40000 ALTER TABLE `chat` ENABLE KEYS */;
-UNLOCK TABLES;
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `customer`
 --
 
-DROP TABLE IF EXISTS `customer`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `customer` (
-  `customer_id` int(11) NOT NULL AUTO_INCREMENT,
+  `customer_id` int(11) NOT NULL,
   `customerLastname` varchar(45) NOT NULL,
   `customerFirstname` varchar(50) NOT NULL,
-  `req_status` enum('Pending','Accepted','Declined') NOT NULL,
-  `status` enum('Inactive','Active') NOT NULL DEFAULT 'Inactive',
+  `req_status` enum('Inactive','Active') NOT NULL DEFAULT 'Inactive',
+  `status` enum('Pending','Accepted','Declined') NOT NULL DEFAULT 'Pending',
   `dateOfRegistration` date NOT NULL,
-  `pet_type` varchar(45) NOT NULL,
-  PRIMARY KEY (`customer_id`),
-  UNIQUE KEY `customer_id_UNIQUE` (`customer_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+  `pet_type` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `customer`
---
-
-LOCK TABLES `customer` WRITE;
-/*!40000 ALTER TABLE `customer` DISABLE KEYS */;
-/*!40000 ALTER TABLE `customer` ENABLE KEYS */;
-UNLOCK TABLES;
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `custreq`
 --
 
-DROP TABLE IF EXISTS `custreq`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `custreq` (
   `customer_id` int(11) NOT NULL,
-  `servicerequest_id` int(11) NOT NULL,
-  KEY `customer_id_idx` (`customer_id`),
-  KEY `servicerequest_id_idx` (`servicerequest_id`),
-  KEY `servicerequest_id_NOT NULL` (`servicerequest_id`),
-  CONSTRAINT `customer_id` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`) ON UPDATE CASCADE,
-  CONSTRAINT `servicerequest_id` FOREIGN KEY (`servicerequest_id`) REFERENCES `servicerequest` (`servicerequest_id`) ON UPDATE CASCADE
+  `servicerequest_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `custreq`
---
-
-LOCK TABLES `custreq` WRITE;
-/*!40000 ALTER TABLE `custreq` DISABLE KEYS */;
-/*!40000 ALTER TABLE `custreq` ENABLE KEYS */;
-UNLOCK TABLES;
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `payment`
 --
 
-DROP TABLE IF EXISTS `payment`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `payment` (
-  `payment_id` int(11) NOT NULL AUTO_INCREMENT,
+  `payment_id` int(11) NOT NULL,
   `date` date NOT NULL,
   `time` time(4) NOT NULL,
   `total_amount` int(6) NOT NULL,
   `availService_desc` varchar(45) NOT NULL,
   `invoice_id` int(11) NOT NULL,
-  `customer_id` int(11) NOT NULL,
-  PRIMARY KEY (`payment_id`),
-  UNIQUE KEY `customer_id_UNIQUE` (`customer_id`),
-  UNIQUE KEY `payment_id_UNIQUE` (`payment_id`),
-  UNIQUE KEY `invoice_id_UNIQUE` (`invoice_id`)
+  `customer_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `payment`
---
-
-LOCK TABLES `payment` WRITE;
-/*!40000 ALTER TABLE `payment` DISABLE KEYS */;
-/*!40000 ALTER TABLE `payment` ENABLE KEYS */;
-UNLOCK TABLES;
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `products`
 --
 
-DROP TABLE IF EXISTS `products`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `products` (
-  `products_id` int(11) NOT NULL AUTO_INCREMENT,
+  `products_id` int(11) NOT NULL,
   `product_description` varchar(45) NOT NULL,
   `product_name` varchar(45) NOT NULL,
   `product_price` int(11) NOT NULL,
-  `quantity` int(11) NOT NULL,
-  PRIMARY KEY (`products_id`),
-  UNIQUE KEY `products_id_UNIQUE` (`products_id`)
+  `quantity` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `products`
---
-
-LOCK TABLES `products` WRITE;
-/*!40000 ALTER TABLE `products` DISABLE KEYS */;
-/*!40000 ALTER TABLE `products` ENABLE KEYS */;
-UNLOCK TABLES;
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `registration`
 --
 
-DROP TABLE IF EXISTS `registration`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `registration` (
-  `register_id` int(11) NOT NULL AUTO_INCREMENT,
+  `register_id` int(11) NOT NULL,
   `lastName` varchar(50) NOT NULL,
   `firstName` varchar(50) NOT NULL,
   `username` varchar(50) NOT NULL,
@@ -236,60 +146,46 @@ CREATE TABLE `registration` (
   `contactNumber` int(11) NOT NULL,
   `req_status` enum('Inactive','Active') NOT NULL DEFAULT 'Inactive',
   `status` enum('Pending','Accepted','Declined') NOT NULL,
-  `typeOfuser` enum('Customer','Service Provider') NOT NULL,
-  PRIMARY KEY (`register_id`),
-  UNIQUE KEY `register_id_UNIQUE` (`register_id`),
-  UNIQUE KEY `username_UNIQUE` (`username`),
-  UNIQUE KEY `email_UNIQUE` (`email`)
-) ENGINE=MyISAM AUTO_INCREMENT=105 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+  `typeOfuser` enum('Customer','Service Provider') NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `registration`
 --
 
-LOCK TABLES `registration` WRITE;
-/*!40000 ALTER TABLE `registration` DISABLE KEYS */;
-INSERT INTO `registration` VALUES (102,'Alegre','Marinelle','marsi','0dd2d2bfa0038175217810b72b20c283','alegre.marinelle@gmail.com',19,'F','349 Balacbac Baguio City',9234343,'Active','Accepted','Customer');
-/*!40000 ALTER TABLE `registration` ENABLE KEYS */;
-UNLOCK TABLES;
+INSERT INTO `registration` (`register_id`, `lastName`, `firstName`, `username`, `password`, `email`, `age`, `gender`, `address`, `contactNumber`, `req_status`, `status`, `typeOfuser`) VALUES
+(102, 'Alegre', 'Marinelle', 'marsi', '0dd2d2bfa0038175217810b72b20c283', 'alegre.marinelle@gmail.com', 19, 'F', '349 Balacbac Baguio City', 9234343, 'Active', 'Accepted', 'Customer');
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `servicecategory`
 --
 
-DROP TABLE IF EXISTS `servicecategory`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `servicecategory` (
-  `servicecategory_id` int(11) NOT NULL AUTO_INCREMENT,
+  `servicecategory_id` int(11) NOT NULL,
   `services` enum('pawmed','pawgroom') NOT NULL,
   `customer_id` int(11) NOT NULL,
-  `serviceprovider_id` int(11) NOT NULL,
-  PRIMARY KEY (`servicecategory_id`),
-  UNIQUE KEY `servicecategory_id_UNIQUE` (`servicecategory_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+  `serviceprovider_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `servicecategory`
 --
 
-LOCK TABLES `servicecategory` WRITE;
-/*!40000 ALTER TABLE `servicecategory` DISABLE KEYS */;
-INSERT INTO `servicecategory` VALUES (1,'pawmed',34,21),(2,'pawgroom',35,19),(3,'pawmed',35,21);
-/*!40000 ALTER TABLE `servicecategory` ENABLE KEYS */;
-UNLOCK TABLES;
+INSERT INTO `servicecategory` (`servicecategory_id`, `services`, `customer_id`, `serviceprovider_id`) VALUES
+(1, 'pawmed', 34, 21),
+(2, 'pawgroom', 35, 19),
+(3, 'pawmed', 35, 21);
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `serviceprovider`
 --
 
-DROP TABLE IF EXISTS `serviceprovider`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `serviceprovider` (
-  `serviceprovider_id` int(11) NOT NULL AUTO_INCREMENT,
+  `serviceprovider_id` int(11) NOT NULL,
   `serviceproviderLastname` varchar(45) NOT NULL,
   `serviceproviderFirstname` varchar(50) NOT NULL,
   `expertise` varchar(45) NOT NULL,
@@ -297,87 +193,213 @@ CREATE TABLE `serviceprovider` (
   `workedStarted` date NOT NULL,
   `status` enum('Accepted','Declined','Pending') NOT NULL DEFAULT 'Pending',
   `req_status` enum('Active','Inactive') NOT NULL,
-  `registration_id` int(11) NOT NULL,
-  PRIMARY KEY (`serviceprovider_id`),
-  UNIQUE KEY `serviceprovider_id_UNIQUE` (`serviceprovider_id`),
-  UNIQUE KEY `registration_id_UNIQUE` (`registration_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+  `registration_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `serviceprovider`
---
-
-LOCK TABLES `serviceprovider` WRITE;
-/*!40000 ALTER TABLE `serviceprovider` DISABLE KEYS */;
-/*!40000 ALTER TABLE `serviceprovider` ENABLE KEYS */;
-UNLOCK TABLES;
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `servicerequest`
 --
 
-DROP TABLE IF EXISTS `servicerequest`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `servicerequest` (
-  `servicerequest_id` int(11) NOT NULL AUTO_INCREMENT,
+  `servicerequest_id` int(11) NOT NULL,
   `servicereq_status` enum('Accepted','Declined','Pending') NOT NULL DEFAULT 'Pending',
   `service_description` varchar(45) NOT NULL,
   `service_price` int(6) NOT NULL,
   `servicereqdate` date NOT NULL,
-  `servicereq_customerId` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`servicerequest_id`),
-  UNIQUE KEY `servicerequest_id_UNIQUE` (`servicerequest_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+  `servicereq_customerId` varchar(45) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `servicerequest`
 --
 
-LOCK TABLES `servicerequest` WRITE;
-/*!40000 ALTER TABLE `servicerequest` DISABLE KEYS */;
-INSERT INTO `servicerequest` VALUES (1,'Pending','Checkup',1000,'2017-05-25','34'),(2,'Pending','Groom',350,'2017-05-26','35'),(3,'Pending','Checkup',1000,'2017-05-26','35');
-/*!40000 ALTER TABLE `servicerequest` ENABLE KEYS */;
-UNLOCK TABLES;
+INSERT INTO `servicerequest` (`servicerequest_id`, `servicereq_status`, `service_description`, `service_price`, `servicereqdate`, `servicereq_customerId`) VALUES
+(1, 'Pending', 'Checkup', 1000, '2017-05-25', '34'),
+(2, 'Pending', 'Groom', 350, '2017-05-26', '35'),
+(3, 'Pending', 'Checkup', 1000, '2017-05-26', '35');
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `transaction`
 --
 
-DROP TABLE IF EXISTS `transaction`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `transaction` (
-  `invoice_id` int(11) NOT NULL AUTO_INCREMENT,
+  `invoice_id` int(11) NOT NULL,
   `date` date NOT NULL,
-  `history` varchar(45) NOT NULL,
-  PRIMARY KEY (`invoice_id`),
-  UNIQUE KEY `invoice_id_UNIQUE` (`invoice_id`)
+  `history` varchar(45) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `transaction`
+-- Indexes for dumped tables
 --
 
-LOCK TABLES `transaction` WRITE;
-/*!40000 ALTER TABLE `transaction` DISABLE KEYS */;
-/*!40000 ALTER TABLE `transaction` ENABLE KEYS */;
-UNLOCK TABLES;
+--
+-- Indexes for table `adminlogin`
+--
+ALTER TABLE `adminlogin`
+  ADD PRIMARY KEY (`admin_id`);
 
 --
--- Dumping routines for database 'petcare'
+-- Indexes for table `appointment`
 --
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+ALTER TABLE `appointment`
+  ADD PRIMARY KEY (`appointment_id`),
+  ADD UNIQUE KEY `appointment_id_UNIQUE` (`appointment_id`),
+  ADD UNIQUE KEY `customer_id_UNIQUE` (`customer_id`),
+  ADD UNIQUE KEY `serviceprovider_id_UNIQUE` (`serviceprovider_id`),
+  ADD UNIQUE KEY `servicerequest_id_UNIQUE` (`servicerequest_id`);
 
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+--
+-- Indexes for table `chat`
+--
+ALTER TABLE `chat`
+  ADD PRIMARY KEY (`chat_id`),
+  ADD UNIQUE KEY `serviceprovider_id_UNIQUE` (`serviceprovider_id`),
+  ADD UNIQUE KEY `customer_id_UNIQUE` (`customer_id`),
+  ADD UNIQUE KEY `chat_id_UNIQUE` (`chat_id`);
+
+--
+-- Indexes for table `customer`
+--
+ALTER TABLE `customer`
+  ADD PRIMARY KEY (`customer_id`),
+  ADD UNIQUE KEY `customer_id_UNIQUE` (`customer_id`);
+
+--
+-- Indexes for table `custreq`
+--
+ALTER TABLE `custreq`
+  ADD KEY `customer_id_idx` (`customer_id`),
+  ADD KEY `servicerequest_id_idx` (`servicerequest_id`),
+  ADD KEY `servicerequest_id_NOT NULL` (`servicerequest_id`);
+
+--
+-- Indexes for table `payment`
+--
+ALTER TABLE `payment`
+  ADD PRIMARY KEY (`payment_id`),
+  ADD UNIQUE KEY `customer_id_UNIQUE` (`customer_id`),
+  ADD UNIQUE KEY `payment_id_UNIQUE` (`payment_id`),
+  ADD UNIQUE KEY `invoice_id_UNIQUE` (`invoice_id`);
+
+--
+-- Indexes for table `products`
+--
+ALTER TABLE `products`
+  ADD PRIMARY KEY (`products_id`),
+  ADD UNIQUE KEY `products_id_UNIQUE` (`products_id`);
+
+--
+-- Indexes for table `registration`
+--
+ALTER TABLE `registration`
+  ADD PRIMARY KEY (`register_id`),
+  ADD UNIQUE KEY `register_id_UNIQUE` (`register_id`),
+  ADD UNIQUE KEY `username_UNIQUE` (`username`),
+  ADD UNIQUE KEY `email_UNIQUE` (`email`);
+
+--
+-- Indexes for table `servicecategory`
+--
+ALTER TABLE `servicecategory`
+  ADD PRIMARY KEY (`servicecategory_id`),
+  ADD UNIQUE KEY `servicecategory_id_UNIQUE` (`servicecategory_id`);
+
+--
+-- Indexes for table `serviceprovider`
+--
+ALTER TABLE `serviceprovider`
+  ADD PRIMARY KEY (`serviceprovider_id`),
+  ADD UNIQUE KEY `serviceprovider_id_UNIQUE` (`serviceprovider_id`),
+  ADD UNIQUE KEY `registration_id_UNIQUE` (`registration_id`);
+
+--
+-- Indexes for table `servicerequest`
+--
+ALTER TABLE `servicerequest`
+  ADD PRIMARY KEY (`servicerequest_id`),
+  ADD UNIQUE KEY `servicerequest_id_UNIQUE` (`servicerequest_id`);
+
+--
+-- Indexes for table `transaction`
+--
+ALTER TABLE `transaction`
+  ADD PRIMARY KEY (`invoice_id`),
+  ADD UNIQUE KEY `invoice_id_UNIQUE` (`invoice_id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `adminlogin`
+--
+ALTER TABLE `adminlogin`
+  MODIFY `admin_id` int(1) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `appointment`
+--
+ALTER TABLE `appointment`
+  MODIFY `appointment_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `chat`
+--
+ALTER TABLE `chat`
+  MODIFY `chat_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `customer`
+--
+ALTER TABLE `customer`
+  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+--
+-- AUTO_INCREMENT for table `payment`
+--
+ALTER TABLE `payment`
+  MODIFY `payment_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `products`
+--
+ALTER TABLE `products`
+  MODIFY `products_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `registration`
+--
+ALTER TABLE `registration`
+  MODIFY `register_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=105;
+--
+-- AUTO_INCREMENT for table `servicecategory`
+--
+ALTER TABLE `servicecategory`
+  MODIFY `servicecategory_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `serviceprovider`
+--
+ALTER TABLE `serviceprovider`
+  MODIFY `serviceprovider_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+--
+-- AUTO_INCREMENT for table `servicerequest`
+--
+ALTER TABLE `servicerequest`
+  MODIFY `servicerequest_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `transaction`
+--
+ALTER TABLE `transaction`
+  MODIFY `invoice_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `custreq`
+--
+ALTER TABLE `custreq`
+  ADD CONSTRAINT `customer_id` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `servicerequest_id` FOREIGN KEY (`servicerequest_id`) REFERENCES `servicerequest` (`servicerequest_id`) ON UPDATE CASCADE;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
--- Dump completed on 2017-05-27 19:36:14
