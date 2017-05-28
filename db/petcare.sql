@@ -2,7 +2,7 @@
 --
 -- Host: localhost    Database: petcare
 -- ------------------------------------------------------
--- Server version	5.7.9
+-- Server version	5.7.11
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -234,13 +234,14 @@ CREATE TABLE `registration` (
   `gender` enum('M','F') NOT NULL,
   `address` varchar(1000) NOT NULL,
   `contactNumber` int(11) NOT NULL,
+  `req_status` enum('Inactive','Active') NOT NULL DEFAULT 'Inactive',
   `status` enum('Pending','Accepted','Declined') NOT NULL,
   `typeOfuser` enum('Customer','Service Provider') NOT NULL,
   PRIMARY KEY (`register_id`),
   UNIQUE KEY `register_id_UNIQUE` (`register_id`),
   UNIQUE KEY `username_UNIQUE` (`username`),
   UNIQUE KEY `email_UNIQUE` (`email`)
-) ENGINE=MyISAM AUTO_INCREMENT=103 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=105 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -249,7 +250,7 @@ CREATE TABLE `registration` (
 
 LOCK TABLES `registration` WRITE;
 /*!40000 ALTER TABLE `registration` DISABLE KEYS */;
-INSERT INTO `registration` VALUES (102,'Alegre','Marinelle','marsi','0dd2d2bfa0038175217810b72b20c283','alegre.marinelle@gmail.com',19,'F','349 Balacbac Baguio City',9234343,'Pending','Customer');
+INSERT INTO `registration` VALUES (102,'Alegre','Marinelle','marsi','0dd2d2bfa0038175217810b72b20c283','alegre.marinelle@gmail.com',19,'F','349 Balacbac Baguio City',9234343,'Active','Accepted','Customer');
 /*!40000 ALTER TABLE `registration` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -300,7 +301,7 @@ CREATE TABLE `serviceprovider` (
   PRIMARY KEY (`serviceprovider_id`),
   UNIQUE KEY `serviceprovider_id_UNIQUE` (`serviceprovider_id`),
   UNIQUE KEY `registration_id_UNIQUE` (`registration_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=30 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -365,6 +366,10 @@ LOCK TABLES `transaction` WRITE;
 /*!40000 ALTER TABLE `transaction` DISABLE KEYS */;
 /*!40000 ALTER TABLE `transaction` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Dumping routines for database 'petcare'
+--
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -375,4 +380,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-05-25 17:48:29
+-- Dump completed on 2017-05-27 19:36:14
